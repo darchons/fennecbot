@@ -2,7 +2,7 @@ var bz = require("bz"),
     irc = require("irc"),
     https = require("https"),
     notes = require("./notes"),
-    insults = require('./insults');
+    insults = require('./insults'),
     config = require("./config");
 
 if (module.parent) {
