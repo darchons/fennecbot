@@ -53,7 +53,22 @@ bot.addListener("join",function(channel,who){
 });
 
 
+var lastProcotolTime = 0;
+
 bot.addListener("message", function(from, to, message) {
+  if (from !== bot.nick && message.indexOf("ill") > 0 && message.indexOf("://") < 0) {
+    var now = Date.now();
+    if (now - lastProcotolTime >= 28800000) {
+      var word = /\b\w+ill\w+\b/.exec(message);
+      word = word && word[0] && word[0].replace("ill", "://");
+      if (word && word.toLowerCase().indexOf("z://a") < 0 && word.length < 10) {
+        lastProcotolTime = now;
+        bot.say(to, from + ": Did you mean \"" + word + "\"?");
+        return;
+      }
+    }
+  }
+
   if (message.indexOf(bot.nick) !== 0) {
     return;
   }
